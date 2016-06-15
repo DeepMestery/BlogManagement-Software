@@ -2,7 +2,9 @@ package bag;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -26,125 +28,121 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class Change {
-	
+@SuppressWarnings("unused")
+public class Change
+{
 	String Sgrade,Sclass,sno;
-	String v1[]=Checkmember1();
+	String v1[]=Changemember1();
     String v2[]={"空"};
     String v3[]={"空"};
-public String[] Checkmember1()
-{
-	String Sgra[] = null;
-	Connection conn = null;
-	Statement stmt = null;
-	
-	try
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-	}
-	catch(Exception e)
-	{
-		System.out.println("驱动加载失败。");
-	}
-	
-	try
-	{
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-		stmt = conn.createStatement();
-		
-//查询所有年级----------------------------------------------------
-		String sql = "select Sgrade from Stu";
-		ResultSet rs = stmt.executeQuery(sql);
-		String a[] = new String [100];
-		for(int i = 0;i < 100;i++)
-		{
-			a[i] = "0";
-		}
-		
-		while(rs.next())
-		{
-			String year = rs.getString(1);
-			for(int i = 0;i < 100;i++)
-			{
-				if(a[i].equals(year))
-				{
-					break;
-				}
-				else if(a[i] != "0")
-				{
-					continue;
-				}
-				else
-				{
-					a[i] = year;
-					break;
-				}
-			}
-		}
-		
-		int count = 0;
-		for(int i = 0;i < 100;i++)
-		{
-			if(a[i] != "0")
-			{
-				count++;
-			}
-			else
-			{
-				break;
-			}
-		}
-		count++;
-	    Sgra = new String [count];
-		Sgra[0] = "全部";
-		for(int i = 1;i < count;i++)
-		{
-			Sgra[i] = a[i-1];
-		}
-		
-	
-			
-	}
-	catch(Exception e)
-	{
-		System.out.println("加载失败。");
-	}
-	try
-	{
-		stmt.close();
-		conn.close();
-	}
-	catch(Exception e)
-	{
-		System.out.println("关闭资源过程发生异常。");
-	}
-	return Sgra;
-	
-};
 
-public String[] Checkmember2()
-{
-	Connection conn = null;
-	Statement stmt = null;
-	String Scla[] = null;
-	int count = 0;
-	try
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-	}
-	catch(Exception e)
-	{
-		System.out.println("驱动加载失败。");
-	}
+    public String[] Changemember1()
+    {
+    	String Sgra[] = null;
+    	Connection conn = null;
+    	Statement stmt = null;
 	
-	try
-	{
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-		stmt = conn.createStatement();
+    	try
+    	{
+    		Class.forName("com.mysql.jdbc.Driver");
+    	}
+    	catch(Exception e)
+    	{
+    		System.out.println("驱动加载失败。");
+    	}
+    	
+    	try
+    	{
+    		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+    		stmt = conn.createStatement();
 		
-//按照年级来查询相应的班级-------------------------------------------------------
-		String gra = Sgrade;
-		String cla;
+    		String sql = "select Sgrade from Stu";
+    		ResultSet rs = stmt.executeQuery(sql);
+    		String a[] = new String [100];
+    		for(int i = 0;i < 100;i++)
+    		{
+    			a[i] = "0";
+    		}
+		
+    		while(rs.next())
+    		{
+    			String year = rs.getString(1);
+    			for(int i = 0;i < 100;i++)
+    			{
+    				if(a[i].equals(year))
+    				{
+    					break;
+    				}	
+    				else if(a[i] != "0")
+    				{
+    					continue;
+    				}	
+    				else
+    				{
+    					a[i] = year;
+    					break;
+    				}
+    			}
+    		}
+		
+    		int count = 0;
+    		for(int i = 0;i < 100;i++)
+    		{
+    			if(a[i] != "0")
+    			{
+    				count++;
+    			}
+    			else
+    			{
+    				break;
+    			}
+    		}
+    		count++;
+    		Sgra = new String [count];
+    		Sgra[0] = "全部";
+    		for(int i = 1;i < count;i++)
+    		{
+    			Sgra[i] = a[i-1];
+    		}
+    	}
+    	catch(Exception e)
+    	{
+    		System.out.println("加载失败。");
+    	}
+    	try
+		{
+    		stmt.close();
+    		conn.close();
+		}
+    	catch(Exception e)
+    	{
+    		System.out.println("关闭资源过程发生异常。");
+    	}
+    	return Sgra;
+    }
+
+	public String[] Changemember2()
+	{
+		Connection conn = null;
+		Statement stmt = null;
+		String Scla[] = null;
+		int count = 0;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(Exception e)
+		{
+			System.out.println("驱动加载失败。");
+		}
+	
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+			stmt = conn.createStatement();
+			
+			String gra = Sgrade;
+			String cla;
 		
 		
 			String sql = "select * from Stu where Sgrade = '"+gra+"'";
@@ -194,54 +192,159 @@ public String[] Checkmember2()
 			{
 				Scla[i] = a[i-1];
 			}
-		
-	
-	}
-	catch(Exception e)
-	{
-		
-		System.out.println("数据库操作发生异常。");
-	}
+		}
+		catch(Exception e)
+		{
+			System.out.println("数据库操作发生异常。");
+		}
 			
-	try
-	{
-		stmt.close();
-		conn.close();
-	}
-	catch(Exception e)
-	{
-		System.out.println("关闭资源过程发生异常。");
-	}
+		try
+		{
+			stmt.close();
+			conn.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("关闭资源过程发生异常。");
+		}
 	
-	return Scla;
-}
+		return Scla;
+	}
 
-
-
-public String[] Checkmember4(String sql)
-{
-	
-	Connection conn = null;
-	Statement stmt = null;
-	String Sno[] = null;
-	
-	try
+	public String[] Changemember5(String sql)
 	{
-		Class.forName("com.mysql.jdbc.Driver");
+		Connection conn = null;
+		Statement stmt = null;
+		String Sno[] = null;
+		
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(Exception e)
+		{
+			System.out.println("驱动加载失败。");
+		}	
+	
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+			stmt = conn.createStatement();
+		
+			int count = 0;
+			String[] a1=new String[100];
+			String[] a2=new String[100];
+			String[] a3=new String[100];
+			ResultSet rs = null;
+			
+			rs = stmt.executeQuery(sql);
+			for(int i = 0;i < 100;i++)
+			{
+				a1[i] = "0";
+				a2[i] = "0";
+				a3[i] = "0";
+			}
+			int times = 0;
+			
+			while(rs.next())
+			{
+				String bno = Integer.toString(rs.getInt(1));
+				String bname=rs.getString(2);
+				int gscore=rs.getInt(3);
+				String bscore=Integer.toString(gscore);
+				a1[times] = bno;
+				a2[times] = bname;
+				a3[times] =bscore;
+				times++;
+			}
+			String[][] a7=new String[times][3];
+			for(int i=0;i<times;i++)
+			{
+				a7[i][0]=a1[i];
+				a7[i][1]=a2[i];
+				a7[i][2]=a3[i];
+			}
+			 
+			Object[][] playerInfo = a7;
+			String[] Names={"博文序号","博文题目","博文分数"};
+			JFrame f=new JFrame(sno+"的个人成绩");
+			f.setBounds(500, 110, 520, 400);
+			JTable table=new JTable(playerInfo,Names);
+		    table.setPreferredScrollableViewportSize(new Dimension(520,400));
+			JScrollPane scrollPane=new JScrollPane(table);
+			
+			table.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){   
+					if(e.getClickCount() == 1)
+			    	{
+						int bno=0;
+						String bname="null";
+						int score=0;
+						int row =((JTable)e.getSource()).rowAtPoint(e.getPoint()); 
+						bno = Integer.parseInt(String.valueOf(table.getValueAt(row,0)));
+						bname=(String)(table.getValueAt(row,1)); 
+					    score=Integer.parseInt(String.valueOf(table.getValueAt(row,2))); 
+						Change5(sql,bno,bname,score);
+						f.setVisible(false);
+			    	}
+					else return;
+				}
+			});
+			table.addMouseMotionListener(new MouseAdapter(){  
+				public void mouseMoved(MouseEvent e) {
+					if(e.getPoint().y!=0)
+					{
+						table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					}
+			    	else
+			    	{
+			    		table.setCursor(null);
+			    		table .setToolTipText(null);
+			    	}
+				}
+			});
+			f.getContentPane().add(scrollPane,BorderLayout.CENTER);
+			f.setTitle(sno+"的个人分数表");
+			f.pack();
+			f.setVisible(true);
+			rs.close();
+		}
+		catch(Exception e)
+		{	
+			System.out.println("数据库操作发生异常。");
+		}
+	
+		try
+		{
+			stmt.close();
+			conn.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("关闭资源过程发生异常。");
+		}
+		return null;
 	}
-	catch(Exception e)
+
+	public String[] Changemember4(String sql)
 	{
-		System.out.println("驱动加载失败。");
-	}
+		Connection conn = null;
+		Statement stmt = null;
+		String Sno[] = null;
 	
-	try
-	{
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-		stmt = conn.createStatement();
-		
-//按照班级来查询相应的学号-----------------------------------------------------
-		
-		
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(Exception e)
+		{
+			System.out.println("驱动加载失败。");
+		}
+	
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+			stmt = conn.createStatement();
 			
 			int count = 0;
 			String[] a1=new String[100];
@@ -252,94 +355,89 @@ public String[] Checkmember4(String sql)
 			String[] a6=new String[100];
 			ResultSet rs = null;
 			
-			
-			
-				rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
+			for(int i = 0;i < 100;i++)
+			{
+				a1[i] = "0";
+				a2[i] = "0";
+				a3[i] = "0";
+				a4[i] = "0";
+				a5[i] = "0";
+				a6[i] = "0";
+			}
 				
+			while(rs.next())
+			{
+				String sgra=rs.getString(1);
+				String scla=rs.getString(2);
+				String num = rs.getString(3);
+				String name=rs.getString(4);
+				String blog=rs.getString(5);
+				String score=Integer.toString(rs.getInt(6));
 				for(int i = 0;i < 100;i++)
 				{
-					a1[i] = "0";
-					a2[i] = "0";
-					a3[i] = "0";
-					a4[i] = "0";
-					a5[i] = "0";
-					a6[i] = "0";
-				}
-				
-				while(rs.next())
-				{
-					String sgra=rs.getString(1);
-					String scla=rs.getString(2);
-					String num = rs.getString(3);
-					String name=rs.getString(4);
-					String blog=rs.getString(5);
-					String score=Integer.toString(rs.getInt(6));
-					for(int i = 0;i < 100;i++)
-					{
-						if(a3[i]==num)
-						{
-							break;
-						}
-						else if(a3[i] != "0")
-						{
-							continue;
-						}
-						else
-						{
-							a1[i] = sgra;
-							a2[i] =scla;
-							a3[i] =num;
-							a4[i] =name;
-							a5[i] =blog;
-							a6[i] =score;
-							
-							break;
-						}
-					}
-				}
-				
-				 count = 0;
-				for(int i = 0;i < 100;i++)
-				{
-					if(a3[i] != "0")
-					{
-						count++;
-					}
-					else
+					if(a3[i]==num)
 					{
 						break;
 					}
+					else if(a3[i] != "0")
+					{
+						continue;
+					}
+					else
+					{
+						a1[i] = sgra;
+						a2[i] =scla;
+						a3[i] =num;
+						a4[i] =name;
+						a5[i] =blog;
+						a6[i] =score;
+						break;
+					}
 				}
-				count++;
+			}
 				
-				String Snum[] = new String [count];
-                  
-				for(int i = 0;i < count;i++)
+			count = 0;
+			for(int i = 0;i < 100;i++)
+			{
+				if(a3[i] != "0")
 				{
-					Snum[i] = a3[i];
+					count++;
 				}
+				else
+				{
+					break;
+				}
+			}
+			count++;
 			
-			  String[][] a7=new String[count][6];
-			  for(int i=0;i<count-1;i++)
-				{
-				  a7[i][0]=a1[i];
-				  a7[i][1]=a2[i];
-				  a7[i][2]=a3[i];
-				  a7[i][3]=a4[i];
-				  a7[i][4]=a5[i];
-				  a7[i][5]=a6[i];
-				}
+			String Snum[] = new String [count];
+                 
+			for(int i = 0;i < count;i++)
+			{
+				Snum[i] = a3[i];
+			}			
+			  
+			String[][] a7=new String[count][6];
+			for(int i=0;i<count-1;i++)
+			{
+				a7[i][0]=a1[i];
+				a7[i][1]=a2[i];
+				a7[i][2]=a3[i];
+				a7[i][3]=a4[i];
+				a7[i][4]=a5[i];
+				a7[i][5]=a6[i];
+			}
 			Object[][] playerInfo = a7;
 			String[] Names={"年级","班级","学号","姓名","博客地址","总分数"};
-			JFrame f=new JFrame();
+			JFrame f=new JFrame("查询结果");
+			f.setBounds(470, 100, 600, 400);
 			JTable table=new JTable(playerInfo,Names);
-		    table.setPreferredScrollableViewportSize(new Dimension(550,30));
+		    table.setPreferredScrollableViewportSize(new Dimension(600,400));
 			JScrollPane scrollPane=new JScrollPane(table);
-			//*********************************************
-			table.addMouseListener(new MouseAdapter()
-			{
-				public void mouseClicked(MouseEvent e)
-				{   
+			
+			table.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){   
 					if(e.getClickCount() == 1)
 			    	{
 						int row =((JTable)e.getSource()).rowAtPoint(e.getPoint()); //获得行位置 
@@ -354,58 +452,68 @@ public String[] Checkmember4(String sql)
 						if(sno==null) sgrade="无";
 						if(sname==null) sgrade="无";
 						if(sblog==null) sgrade="无";
-					     f.setVisible(false);
+					    f.setVisible(false);
 						Change4(sql,sgrade,sclass,sno,sname,sblog);
 			    	}
 					else return;
 				}
-			}
-			);
-			//***********************************************
+			});
+			table.addMouseMotionListener(new MouseAdapter(){  
+				public void mouseMoved(MouseEvent e) {
+			    	if(e.getPoint().y!=0)
+					{
+						table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					}
+			    	else
+			    	{
+			    		table.setCursor(null);
+			    		table .setToolTipText(null);
+			    	}
+				}  
+			});
+			
 			f.getContentPane().add(scrollPane,BorderLayout.CENTER);
-			f.setTitle("查询结果");
 			f.pack();
 			f.setVisible(true);
 			rs.close();
-			 
 		}
-	catch(Exception e)
-	{
-		
-		System.out.println("数据库操作发生异常。");
-	}
+		catch(Exception e)
+		{	
+			System.out.println("数据库操作发生异常。");
+		}
 	
-	try
-	{
-		stmt.close();
-		conn.close();
+		try
+		{
+			stmt.close();
+			conn.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("关闭资源过程发生异常。");
+		}
+		return Sno;
 	}
-	catch(Exception e)
+
+
+	public String[] Changemember3()
 	{
-		System.out.println("关闭资源过程发生异常。");
-	}
-	return Sno;
-  }
-public String[] Checkmember3()
-{
-	Connection conn = null;
-	Statement stmt = null;
-	String Sno[] = null ;
-	try
-	{
-		Class.forName("com.mysql.jdbc.Driver");
-	}
-	catch(Exception e)
-	{
-		System.out.println("驱动加载失败。");
-	}
+		Connection conn = null;
+		Statement stmt = null;
+		String Sno[] = null ;
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(Exception e)
+		{
+			System.out.println("驱动加载失败。");
+		}
 	
-	try
-	{
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-		stmt = conn.createStatement();
-		
-//按照班级来查询相应的学号-----------------------------------------------------
+		try
+		{
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+			stmt = conn.createStatement();
+			
 			String cla = Sclass;
 			ResultSet rs=null;
 			if(cla.equals("全部"))
@@ -416,11 +524,8 @@ public String[] Checkmember3()
 			else
 			{
 				String sql = "select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno having Sclass = '"+cla+"'";
-				
 				rs = stmt.executeQuery(sql);
-				
 				String a[]=new String[100];
-				
 				for(int i = 0;i < 100;i++)
 				{
 					a[i] = "0";
@@ -460,7 +565,7 @@ public String[] Checkmember3()
 					}
 				}
 				count++;
-				 Sno = new String [count];
+				Sno = new String [count];
 				Sno[0] = "全部";
 				for(int i = 1;i < count;i++)
 				{
@@ -468,573 +573,487 @@ public String[] Checkmember3()
 					
 				}
 			}
-			
-		rs.close();
-	}
-	catch(Exception e)
-	{
-		
-		System.out.println("数据库操作发生异常。");
-	}
+			rs.close();
+		}
+		catch(Exception e)
+		{		
+			System.out.println("数据库操作发生异常。");
+		}
 	
-	try
-	{
-		stmt.close();
-		conn.close();
+		try
+		{
+			stmt.close();
+			conn.close();
+		}
+		catch(Exception e)
+		{
+			System.out.println("关闭资源过程发生异常。");
+		}
+		return Sno;
 	}
-	catch(Exception e)
-	{
-		System.out.println("关闭资源过程发生异常。");
-	}
-	return Sno;
-  }
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
-public void Change4(String sql1,String sgrade1,String sclass1,String sno1,String sname1,String sblog1)
-{
-	try
+
+	public void Change4(String sql1,String sgrade1,String sclass1,String sno1,String sname1,String sblog1)
 	{
-		//================================================================
-	JFrame frame =new JFrame(sno1+"的信息修改界面");
-	Container cont=frame.getContentPane();
-	JLabel sgra =new JLabel("年级");
-	JLabel scla =new JLabel("班级");
-	JLabel sna =new JLabel("姓名");
-	JLabel sbl =new JLabel("博客地址");
-	JTextField sgrade =new JTextField(sgrade1,30);
-	JTextField sclass =new JTextField(sclass1,30);
-	JTextField sname =new JTextField(sname1,30);
-	JTextField sblog =new JTextField(sblog1,30);
-	//==========================================================================
+		try
+		{
+			JFrame frame =new JFrame(sno1+"的信息修改界面");
+			Container cont=frame.getContentPane();
+			JLabel sgra =new JLabel("年级");
+			JLabel scla =new JLabel("班级");
+			JLabel sna =new JLabel("姓名");
+			JLabel sbl =new JLabel("博客地址");
+			JTextField sgrade =new JTextField(sgrade1,30);
+			JTextField sclass =new JTextField(sclass1,30);
+			JTextField sname =new JTextField(sname1,30);
+			JTextField sblog =new JTextField(sblog1,30);
 	
-	JButton but1=new JButton("确定");
-	JButton but2=new JButton("取消");
-	frame.setLayout(null);
-	frame.setSize(600, 300);
-	frame.setLocation(500,250);
-	sgra.setBounds(10, 5, 80, 30);
-	scla.setBounds(110,5, 80, 30);
-	sna.setBounds(310,5, 80, 30);
-	sbl.setBounds(410,5, 80, 30);
-	sgrade.setBounds(10, 50,80, 30);
-	sclass.setBounds(110, 50,80,30);
-	sname.setBounds(310, 50,80,30);
-	sblog.setBounds(410, 50,160,30);
-	but1.setBounds(110, 100,80,30);
-	but2.setBounds(310, 100,80,30);
-	cont.add(sgrade);
-	cont.add(sclass);
-	cont.add(sname);
-	cont.add(sblog);
+			JButton but1=new JButton("确定");
+			JButton but2=new JButton("取消");
+			frame.setLayout(null);
+			frame.setSize(600, 450);
+			frame.setLocation(500,110);
+			sgra.setBounds(130,10, 100, 50);
+			sgra.setFont(new Font("楷体",Font.BOLD,16));
+			scla.setBounds(130, 80, 100, 50);
+			scla.setFont(new Font("楷体",Font.BOLD,16));
+			sna.setBounds(130, 150, 100, 50);
+			sna.setFont(new Font("楷体",Font.BOLD,16));
+			sbl.setBounds(100, 220, 100, 50);
+			sbl.setFont(new Font("楷体",Font.BOLD,16));
+			sgrade.setBounds(200, 20, 250, 30);
+			sclass.setBounds(200, 90, 250, 30);
+			sname.setBounds(200, 160, 250, 30);
+			sblog.setBounds(200, 230,250, 30);
+			but1.setBounds(100, 340, 80, 30);
+			but1.setFont(new Font("楷体",Font.BOLD,16));
+			but2.setBounds(380, 340,  80, 30);
+			but2.setFont(new Font("楷体",Font.BOLD,16));
+			cont.add(sgrade);
+			cont.add(sclass);
+			cont.add(sname);
+			cont.add(sblog);
 	
-	cont.add(sgra);
-	cont.add(scla);
-	cont.add(sna);
-	cont.add(sbl);
-	cont.add(but1);
-	cont.add(but2);	
-	frame.setVisible(true);
+			cont.add(sgra);
+			cont.add(scla);
+			cont.add(sna);
+			cont.add(sbl);
+			cont.add(but1);
+			cont.add(but2);	
+			frame.setVisible(true);
 	
-	but1.addActionListener(new ActionListener(){
-		    public void actionPerformed(ActionEvent arg0){
-			    if(arg0.getSource()==but1){
-			    	String gra=sgrade.getText();
-			    	String cla=sclass.getText();  
-			    	String name=sname.getText();
-			    	String blog=sblog.getText();
-			    	frame.setVisible(false);
-					Connection conn = null;
-					Statement stmt = null;
+			but1.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					if(arg0.getSource()==but1)
+					{
+						String gra=sgrade.getText();
+						String cla=sclass.getText();  
+						String name=sname.getText();
+						String blog=sblog.getText();
+						frame.setVisible(false);
+						Connection conn = null;
+						Statement stmt = null;
 					
-					try
-					{
-						Class.forName("con.mysql.jdbc.Driver");
-					}
-					catch(Exception e)
-					{
-						JFrame J = new JFrame();
-						JLabel L = new JLabel("加载驱动失败。");
-						J.add(L);
-					}
+						try
+						{
+							Class.forName("con.mysql.jdbc.Driver");
+						}
+						catch(Exception e)
+						{
+							JFrame J = new JFrame();
+							JLabel L = new JLabel("加载驱动失败。");
+							J.add(L);
+						}
 					
-					try
-					{
-						
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-						stmt = conn.createStatement();
-						String sql = "update Stu set Sgrade='"+gra+"',Sclass='"+cla
+						try
+						{
+							conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+							stmt = conn.createStatement();
+							String sql = "update Stu set Sgrade='"+gra+"',Sclass='"+cla
 								+"',Sname='"+name+"',Blog='"+blog+"'where Sno ='"+sno1+"'";
-						int row = stmt.executeUpdate(sql);
-						System.out.println("2");
-						JFrame J = new JFrame();
-						JButton but1=new JButton("确定");	
-						J.setLayout(null);
-						JLabel L = new JLabel("数据库中更新了"+row+"条数据。");
-						but1.setBounds(40, 110,90,30);
-					    but2.setBounds(160, 110,90,30);
-					    L.setBounds(70, 5, 200, 100);
-						J.setSize(300,200);
-					    J.setLocation(550, 250);
-						J.add(L);
-						J.add(but1);
-						J.add(but2);
-						J.setVisible(true);
-						but1.addActionListener(new ActionListener()
-						{
-							public void actionPerformed(ActionEvent arg0)
-							{
-								if(arg0.getSource()==but1)
-								{
-									frame.setVisible(false);
-									J.setVisible(false);
-									
-									Checkmember4(sql1);
+							int row = stmt.executeUpdate(sql);
+							JFrame J = new JFrame("修改成功");
+							JButton but1=new JButton("确定");	
+							J.setLayout(null);
+							JLabel L = new JLabel("信息表修改了"+row+"条数据。");
+						    but1.setBounds(100, 110,110,30);
+						    but1.setFont(new Font("楷体",Font.BOLD,16));
+							L.setBounds(55, 5, 200,100);
+							L.setFont(new Font("楷体",1,17));
+							J.setSize(320, 220);
+							J.setLocation(530, 230);
+							J.add(L);
+							J.add(but1);
+							J.setVisible(true);
+							but1.addActionListener(new ActionListener(){
+								public void actionPerformed(ActionEvent arg0){
+									if(arg0.getSource()==but1)
+									{
+										frame.setVisible(false);
+										J.setVisible(false);
+										Changemember4(sql1);
+									}
 								}
-							}
-						});
-						
-					}
-					catch(Exception e)
-					{
-						JFrame J = new JFrame();
-						JLabel L = new JLabel("数据库操作过程发生的异常。");
-						J.add(L);
-					}
-					
-					try
-					{
-						stmt.close();
-						conn.close();
-					}
-					catch(Exception e)
-					{
-						JFrame J = new JFrame();
-						JLabel L = new JLabel("关闭数据库连接发生异常。");
-						J.add(L);
-					}
-				} 
-		    }  
-	   });
-	   but2.addActionListener(new ActionListener(){
-		    public void actionPerformed(ActionEvent arg0){
-			    if(arg0.getSource()==but2){
-			    	 frame.setVisible(false);
-			    	 Checkmember4(sql1);
-			    }
-		    }
-	    });  
-	}
-	catch(Exception e)
-	{
-		System.out.println(" 数据库操作异常");
-	}
-}
-public void Change5(String sql1,int bno,String bname,int score)
-{
-	try
-	{
-		//================================================================
-	String score1=Integer.toString(score);
-	JFrame frame =new JFrame("信息修改界面");
-	Container cont=frame.getContentPane();
-	JLabel lbname =new JLabel("博文题目");
-	JLabel  lscore=new JLabel("博文分数");
-	JTextField tbname =new JTextField(bname,30);
-	JTextField tscore =new JTextField(score1,30);
-
-	//==========================================================================
-	String gbame=tbname.getText();
-	String gscore=tscore.getText(); 
-    int score2=  Integer.parseInt(gscore);
-	JButton but1=new JButton("确定");
-	JButton but2=new JButton("取消");
-	frame.setLayout(null);
-	frame.setSize(600, 300);
-	frame.setLocation(500,250);
-    lbname.setBounds(10, 5, 80, 30);
-	tbname.setBounds(110,5, 80, 30);
-	lscore.setBounds(210,5, 80, 30);
-	tscore.setBounds(310,5, 80, 30);
-	
-	
-	but1.setBounds(110, 100,80,30);
-	but2.setBounds(310, 100,80,30);
-	//sn.setEnabled(false);
-	cont.add(lbname);
-	cont.add(tbname);
-	cont.add(lscore);
-	cont.add(tscore);
-	cont.add(but1);
-	cont.add(but2);	
-	frame.setVisible(true);
-	
-	but1.addActionListener(new ActionListener(){
-		    public void actionPerformed(ActionEvent arg0){
-			    if(arg0.getSource()==but1){
-			    	String bname=tbname.getText();
-			    	String score2=tscore.getText(); 
-			    	int score=  Integer.parseInt(score2);
-			    	frame.setVisible(false);
-					Connection conn = null;
-					Statement stmt = null;
-					
-					try
-					{
-						Class.forName("con.mysql.jdbc.Driver");
-					}
-					catch(Exception e)
-					{
-						JFrame J = new JFrame();
-						JLabel L = new JLabel("加载驱动失败。");
-						J.add(L);
-					}
-					
-					try
-					{
-						conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-						stmt = conn.createStatement();
-						String sql = "update  set bname='"+bname+"',bscore="+score+","+"'where bno ='"+bno+"'";
-						int row = stmt.executeUpdate(sql);
-						JFrame J = new JFrame();
-						JButton but1=new JButton("确定");	
-						J.setLayout(null);
-						JLabel L = new JLabel("数据库中更新了"+row+"条数据。");
-						but1.setBounds(40, 110,90,30);
-					    but2.setBounds(160, 110,90,30);
-					    L.setBounds(70, 5, 200, 100);
-						J.setSize(300,200);
-					    J.setLocation(550, 250);
-						J.add(L);
-						J.add(but1);
-						J.add(but2);
-						J.setVisible(true);
-						but1.addActionListener(new ActionListener()
+							});
+						}
+						catch(Exception e)
 						{
-							public void actionPerformed(ActionEvent arg0)
-							{
-								if(arg0.getSource()==but1)
-								{
-									frame.setVisible(false);
-									J.setVisible(false);
-									Checkmember4(sql1);
-								}
-							}
-						});
-						
-					}
-					catch(Exception e)
-					{
-						JFrame J = new JFrame();
-						JLabel L = new JLabel("数据库操作过程发生的异常。");
-						J.add(L);
-					}
+							JFrame J = new JFrame();
+							JLabel L = new JLabel("数据库操作过程发生的异常。");
+							J.add(L);
+						}
 					
-					try
-					{
-						stmt.close();
-						conn.close();
+						try
+						{
+							stmt.close();
+							conn.close();
+						}
+						catch(Exception e)
+						{
+							JFrame J = new JFrame();
+							JLabel L = new JLabel("关闭数据库连接发生异常。");
+							J.add(L);
+						}
 					}
-					catch(Exception e)
+				}
+			});
+			but2.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					if(arg0.getSource()==but2)
 					{
-						JFrame J = new JFrame();
-						JLabel L = new JLabel("关闭数据库连接发生异常。");
-						J.add(L);
+						frame.setVisible(false);
+						Changemember4(sql1);
 					}
-				} 
-		    }  
-	   });
-	   but2.addActionListener(new ActionListener(){
-		    public void actionPerformed(ActionEvent arg0){
-			    if(arg0.getSource()==but2){
-			    	 frame.setVisible(false);
-			    }
-		    }
-	    });  
+				}
+			});
+		}
+		catch(Exception e)
+		{
+			System.out.println(" 数据库操作异常");
+		}
 	}
-	catch(Exception e)
+
+
+	public void Change5(String sql1,int bno,String bname,int score)
 	{
-		System.out.println(" 数据库操作异常");
+		try
+		{
+			String score1=Integer.toString(score);
+			JFrame frame =new JFrame("信息修改界面");
+			Container cont=frame.getContentPane();
+			JLabel lbname =new JLabel("博文题目");
+			lbname.setFont(new Font("楷体",1,17));
+			JLabel lscore=new JLabel("博文分数");
+			lscore.setFont(new Font("楷体",1,17));
+			JTextField tbname =new JTextField(bname,30);
+			JTextField tscore =new JTextField(score1,30);
+
+			String gbame=tbname.getText();
+			String gscore=tscore.getText();
+			int score2=  Integer.parseInt(gscore);
+			JButton but1=new JButton("确定");
+			but1.setFont(new Font("楷体",1,14));
+			JButton but2=new JButton("取消");
+			but2.setFont(new Font("楷体",1,14));
+			frame.setLayout(null);
+			frame.setSize(400, 300);
+			frame.setLocation(550,180);
+			lbname.setBounds(56, 10, 150, 30);
+			tbname.setBounds(140,10, 160, 30);
+			lscore.setBounds(56, 90 ,150, 30);
+			tscore.setBounds(140,90, 160, 30);
+
+			but1.setBounds(70, 200,90,40);
+			but2.setBounds(230,200,90,40);
+			cont.add(lbname);
+			cont.add(tbname);
+			cont.add(lscore);
+			cont.add(tscore);
+			cont.add(but1);
+			cont.add(but2);	
+			frame.setVisible(true);
+	
+			but1.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					if(arg0.getSource()==but1)
+					{
+						String bname=tbname.getText();
+						String score2=tscore.getText(); 
+						int score=  Integer.parseInt(score2);
+						frame.setVisible(false);
+						Connection conn = null;
+						Statement stmt = null;
+					
+						try
+						{
+							Class.forName("con.mysql.jdbc.Driver");
+						}
+						catch(Exception e)
+						{
+							JFrame J = new JFrame();
+							JLabel L = new JLabel("加载驱动失败。");
+							J.add(L);
+						}
+					
+						try
+						{
+							conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
+							stmt = conn.createStatement();
+							String sql = "update score set bname='"+bname+"',bscore="+score+" where bno ="+bno;
+							int row = stmt.executeUpdate(sql);
+							JFrame J = new JFrame("修改成功");
+							JButton but1=new JButton("确定");	
+							J.setLayout(null);
+							JLabel L = new JLabel("信息表更新了"+row+"条数据");
+						    but1.setBounds(100, 110,110,30);
+						    but1.setFont(new Font("楷体",1,16));
+							L.setBounds(55, 5, 200,100);
+							L.setFont(new Font("楷体",1,17));
+							J.setSize(320, 220);
+							J.setLocation(530, 230);
+							J.add(L);
+							J.add(but1);
+							J.add(but2);
+							J.setVisible(true);
+							but1.addActionListener(new ActionListener()
+							{
+								public void actionPerformed(ActionEvent arg0)
+								{
+									if(arg0.getSource()==but1)
+									{
+										frame.setVisible(false);
+										J.setVisible(false);
+										Changemember5(sql1);
+									}
+								}	
+							});
+						}
+						catch(Exception e)
+						{
+							JFrame J = new JFrame();
+							JLabel L = new JLabel("数据库操作过程发生的异常。");
+							J.add(L);
+						}
+					
+						try
+						{
+							stmt.close();
+							conn.close();
+						}
+						catch(Exception e)
+						{
+							JFrame J = new JFrame();
+							JLabel L = new JLabel("关闭数据库连接发生异常。");
+							J.add(L);
+						}		
+					}
+				}
+			});
+			but2.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){
+					if(arg0.getSource()==but2)
+					{
+						frame.setVisible(false);
+						Changemember5(sql1);
+					}
+				}
+			}); 
+		}
+		catch(Exception e)
+		{
+			System.out.println(" 数据库操作异常");
+		}
 	}
-}
-public void Change3()
-{
-	JFrame frame =new JFrame("条件筛选界面");
-	Container cont=frame.getContentPane();
-	JComboBox b3=null;
-	JButton but1=new JButton("确定");
-	JButton but2=new JButton("取消");
-	JButton but3=new JButton("返回");
-	frame.setLayout(null);
-	
-	v3=Checkmember3();
-    sno=v3[0]; 
-    b3=new JComboBox(v3);
-    b3.setBorder(BorderFactory.createTitledBorder("学号")); 
-    b3.setMaximumRowCount(3);
 
-   b3.addItemListener(new ItemListener() 
-   {
-        public void itemStateChanged(ItemEvent e) 
-        {
-    	    if(e.getStateChange()==ItemEvent.SELECTED)
-    	    {
-    		    String item=(String)e.getItem();
-    		    sno=item;
-    	    }
-	    }
-    
-    });
 
-    but1.addActionListener(new ActionListener(){
-	    public void actionPerformed(ActionEvent arg0){
-		    if(arg0.getSource()==but1){
-		    	if(sno.equals("全部"))
-		    	{
-		    		String sql="select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno having Sclass='"+Sclass+"'";
-			        Checkmember4(sql);
-		    	}
-		    	else
-		    	{
-		    		String sql="select bname as 博文标题,bscore as 博文分数 from score where Sno='"+sno+"'";
-			        //****************************************************************
-		    		Connection conn = null;
-		    		Statement stmt = null;
-		    		String Sno[] = null;
-		    		
-		    		try
-		    		{
-		    			Class.forName("com.mysql.jdbc.Driver");
-		    		}
-		    		catch(Exception e)
-		    		{
-		    			System.out.println("驱动加载失败。");
-		    		}
-		    		
-		    		try
-		    		{
-		    			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
-		    			stmt = conn.createStatement();
-		    			
-		    			
-		    				int count = 0;
-		    				String[] a1=new String[100];
-		    				String[] a2=new String[100];
-		    				ResultSet rs = null;
-		    				
-		    				
-		    				
-		    					rs = stmt.executeQuery(sql);
-		    					
-		    					for(int i = 0;i < 100;i++)
-		    					{
-		    						a1[i] = "0";
-		    						a2[i] = "0";
-		    					}
-		    					
-		    					int times = 0;
-		    					while(rs.next())
-		    					{
-		    						
-		    						String bname=rs.getString(1);
-		    						String score=Integer.toString(rs.getInt(2));
-		    						
-		    						a1[times] = bname;
-		    						a2[times] =score;
-		    						times++;
-		    					}
-		    					
-		    				  String[][] a7=new String[times][2];
-		    				  for(int i=0;i<times-1;i++)
-		    					{
-		    					  a7[i][0]=a1[i];
-		    					  a7[i][1]=a2[i];
-		    					}
-		    				Object[][] playerInfo = a7;
-		    				String[] Names={"博文题目","博文分数"};
-		    				JFrame f=new JFrame();
-		    				JTable table=new JTable(playerInfo,Names);
-		    			    table.setPreferredScrollableViewportSize(new Dimension(550,30));
-		    				JScrollPane scrollPane=new JScrollPane(table);
-		    				table.addMouseListener(new MouseAdapter()
-		    				{
-		    					public void mouseClicked(MouseEvent e)
-		    					{   
-		    						if(e.getClickCount() == 1)
-		    				    	{
-		    							int bno=0;
-		    							String bname="null";
-		    							int score=0;
-		    							int row =((JTable)e.getSource()).rowAtPoint(e.getPoint()); //获得行位置 
-		    							int col=((JTable)e.getSource()).columnAtPoint(e.getPoint()); //获得列位置 
-		    							bno=(int)(table.getValueAt(row,0)); 
-		    							bname=(String)(table.getValueAt(row,2)); 
-		    						     score=(int)(table.getValueAt(row,3)); 
-		    							
-		    							Change5(sql,bno,bname,score);
-		    				    	}
-		    						else return;
-		    					}
-		    				}
-		    				);
-		    				f.getContentPane().add(scrollPane,BorderLayout.CENTER);
-		    				f.setTitle(sno+"的个人分数表");
-		    				f.pack();
-		    				f.setVisible(true);
-		    				rs.close();
-		    				 
-		    			}
-		    		catch(Exception e)
-		    		{
-		    			
-		    			System.out.println("数据库操作发生异常。");
-		    		}
-		    		
-		    		try
-		    		{
-		    			stmt.close();
-		    			conn.close();
-		    		}
-		    		catch(Exception e)
-		    		{
-		    			System.out.println("关闭资源过程发生异常。");
-		    		}
-		    		//*********************************************************************
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void Change3()
+	{
+		JFrame frame =new JFrame("学号筛选");
+		Container cont=frame.getContentPane();
+		JComboBox b3=null;
+		JButton but1=new JButton("确定");
+		but1.setFont(new Font("楷体",1,14));
+		JButton but2=new JButton("取消");
+		but2.setFont(new Font("楷体",1,14));
+		JButton but3=new JButton("返回");
+		but3.setFont(new Font("楷体",1,14));
+		frame.setLayout(null);
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
+		
+		v3=Changemember3();
+		sno=v3[0]; 
+		b3=new JComboBox(v3);
+		b3.setBorder(BorderFactory.createTitledBorder("学号")); 
+		b3.setMaximumRowCount(5);
 
-		    	}
-			    frame.setVisible(false);
-		    } 
-	    }  
-    });
-    but2.addActionListener(new ActionListener(){
-	    public void actionPerformed(ActionEvent arg0){
-		    if(arg0.getSource()==but2){
-		    	 frame.setVisible(false);
-		    }
-	    }
-     });  
-    but3.addActionListener(new ActionListener(){
-	    public void actionPerformed(ActionEvent arg0){
-		    if(arg0.getSource()==but3){
-			   Change2();
-		    }
-	    }
-     }); 
-    
-	frame.setLocation(550, 250);
-    frame.setSize(300,200);
-    b3.setBounds(75, 5, 150,50);
-    but1.setBounds(5, 90, 80,20);
-    but2.setBounds(105, 90, 80,20); 
-    but3.setBounds(205, 90, 80,20); 
-    cont.add(b3);
-    cont.add(but1);
-    cont.add(but2);
-    cont.add(but3);
-    frame.setVisible(true);
-    frame.addWindowFocusListener(new WindowAdapter(){
-	public void WindowClosing(WindowEvent arg0){
-	System.exit(1);
-}
+		b3.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e){
+				if(e.getStateChange()==ItemEvent.SELECTED)
+				{
+					String item=(String)e.getItem();
+					sno=item;
+				}
+			}    
+		});
 
-});
-}
-	
-
-public void Change2()
-{
-	JFrame frame=new JFrame();
-	JComboBox b2=null;
-	 Container cont=frame.getContentPane();
-	JButton but1=new JButton("确定");
-	JButton but2=new JButton("取消");
-	JButton but3=new JButton("返回");
-	frame.setLayout(null);
-	
-	v2=Checkmember2();
-	 Sclass=v2[0];
-	 b2=new JComboBox(v2);
-	 b2.setBorder(BorderFactory.createTitledBorder("班级"));
-	 b2.setMaximumRowCount(3);
-	 b2.addItemListener(new ItemListener() 
-	    {
-	        public void itemStateChanged(ItemEvent e) 
-	        {
-	        	if(e.getStateChange()==ItemEvent.SELECTED)
-	        	{
-	        		String item=(String)e.getItem();
-	        		Sclass=item;
-	        	}
-	    	}
-	        
-	    });
-	 but1.addActionListener(new ActionListener(){
+		but1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				if(arg0.getSource()==but1){
-                 if(Sclass.equals("全部"))
-                 {
-                	
-                	 String sql="select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno having Sgrade ='"+Sgrade+"'";
-                	 Checkmember4(sql);
-                 }
-                 else
-                 {
-                  
-                	 Change3();
-                 }
-                  frame.setVisible(false);
+				if(arg0.getSource()==but1)
+				{
+					if(sno.equals("全部"))
+					{
+						String sql="select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno having Sclass='"+Sclass+"'";
+						Changemember4(sql);
+						frame.setVisible(false);
+					}
+					else
+					{
+						String sql="select bno as 博文序号 ,bname as 博文标题,bscore as 博文分数 from score where Sno='"+sno+"'";
+						Changemember5(sql);
+						frame.setVisible(false);
+					}
+				}
+			}  
+		});
+		but2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				if(arg0.getSource()==but2)
+				{
+					frame.setVisible(false);
+				}
+			}
+		});  
+		but3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				if(arg0.getSource()==but3)
+				{
+					frame.setVisible(false);
+					Change2();
+				}
+			}
+		}); 
+
+        b3.setBounds(70, 10, 180,60);
+        but1.setBounds(5, 120, 80,30);
+        but2.setBounds(105, 120, 80,30); 
+        but3.setBounds(205, 120, 80,30); 
+        cont.add(b3);
+        cont.add(but1);
+        cont.add(but2);
+        cont.add(but3);
+        frame.setVisible(true);
+        frame.addWindowFocusListener(new WindowAdapter(){
+        	public void WindowClosing(WindowEvent arg0){
+        		System.exit(1);
+        	}
+        });
+	}
+	
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void Change2()
+	{
+		JFrame frame=new JFrame("班级筛选");
+		JComboBox b2=null;
+		Container cont=frame.getContentPane();
+		JButton but1=new JButton("确定");
+		but1.setFont(new Font("楷体",1,14));
+		JButton but2=new JButton("取消");
+		but2.setFont(new Font("楷体",1,14));
+		JButton but3=new JButton("返回");
+		but3.setFont(new Font("楷体",1,14));
+		frame.setLayout(null);
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
+	
+		v2=Changemember2();
+		Sclass=v2[0];
+		b2=new JComboBox(v2);
+		b2.setBorder(BorderFactory.createTitledBorder("班级"));
+		b2.setMaximumRowCount(5);
+		b2.addItemListener(new ItemListener(){
+			public void itemStateChanged(ItemEvent e){
+				if(e.getStateChange()==ItemEvent.SELECTED)
+				{
+					String item=(String)e.getItem();
+					Sclass=item;
 				}
 			}
 		});
-	    but2.addActionListener(new ActionListener(){
+		but1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				if(arg0.getSource()==but2){
+				if(arg0.getSource()==but1)
+				{
+					if(Sclass.equals("全部"))
+					{
+						String sql="select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno having Sgrade ='"+Sgrade+"'";
+						Changemember4(sql);
+					}
+					else
+					{
+						Change3();
+					}
+					frame.setVisible(false);
+				}
+			}	
+		});
+		but2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				if(arg0.getSource()==but2)
+				{
 					frame.setVisible(false);
 				}
 			}
 		});
-	    but3.addActionListener(new ActionListener(){
+		but3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				if(arg0.getSource()==but3){
+				if(arg0.getSource()==but3)
+				{
+					frame.setVisible(false);
 					Change1();
 				}
 			}
 		});
 
-		frame.setLocation(550, 250);
-	    frame.setSize(300,200);
-	    b2.setBounds(75, 5, 150,50);
-	    but1.setBounds(5, 90, 80,20);
-	    but2.setBounds(105, 90, 80,20); 
-	    but3.setBounds(205, 90, 80,20); 
-	    cont.add(b2);
+        b2.setBounds(70, 10, 180,60);
+        but1.setBounds(5, 120, 80,30);
+        but2.setBounds(105, 120, 80,30); 
+        but3.setBounds(205, 120, 80,30); 	    
+        cont.add(b2);
 	    cont.add(but1);
 	    cont.add(but2);
 	    cont.add(but3);
 	   
 	    frame.setVisible(true);
-	
-	 
-    }
+	}
 
-	public void Change1(){
-		JFrame frame =new JFrame("条件筛选界面");
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void Change1()
+	{
+		JFrame frame =new JFrame("年级筛选");
 		Container cont=frame.getContentPane();
 		JComboBox b1=null;
 		JButton but1=new JButton("确定");
+		but1.setFont(new Font("楷体",1,14));
 		JButton but2=new JButton("取消");
+		but2.setFont(new Font("楷体",1,14));
 		JButton but3=new JButton("返回");
-		frame.setLocation(550, 250);
+		but3.setFont(new Font("楷体",1,14));
     	frame.setLayout(null);
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
+		
         Sgrade=v1[0];
         sno=v3[0];
         b1=new JComboBox(v1);   
         b1.setBorder(BorderFactory.createTitledBorder("年级"));  
-        b1.setMaximumRowCount(3); 
-        b1.addItemListener(new ItemListener() 
-        {
-            public void itemStateChanged(ItemEvent e) 
-            {
-        	if(e.getStateChange()==ItemEvent.SELECTED)
+        b1.setMaximumRowCount(5); 
+        b1.addItemListener(new ItemListener(){
+            public void itemStateChanged(ItemEvent e){
+            	if(e.getStateChange()==ItemEvent.SELECTED)
              	{
         	    	String item=(String)e.getItem();
         		    Sgrade=item;
@@ -1043,79 +1062,94 @@ public void Change2()
         });
     
         but1.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0){
-			if(arg0.getSource()==but1){
-				//==================================================
-				if(Sgrade.equals("全部"))
-				{
-					String sql="select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno;";
-					Checkmember4(sql);
-				}
-				else
-				{
-					Change2();
-				}
-				frame.setVisible(false);
-			}
-		}
-	});
-    but2.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0){
-			if(arg0.getSource()==but2){
-				frame.setVisible(false);
-			}
-		}
-	});  
-    but3.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0){
-			if(arg0.getSource()==but3){
-				frame.setVisible(false);
-			}
-		}
-	});
-    frame.setSize(300,200);
-    b1.setBounds(75, 5, 150,50);
-    but1.setBounds(5, 90, 80,20);
-    but2.setBounds(105, 90, 80,20); 
-    but3.setBounds(205, 90, 80,20); 
-    cont.add(b1);
-    cont.add(but1);
-    cont.add(but2);
-    cont.add(but3);
-    frame.setVisible(true);
-   
-  }
+        	public void actionPerformed(ActionEvent arg0){
+        		if(arg0.getSource()==but1)
+        		{
+        			if(Sgrade.equals("全部"))
+        			{
+        				String sql="select sgrade as 年级,sclass as 班级,stu.sno as 学号, sname as 姓名,Blog as 博客地址,sum(bscore) as 总分数 from stu left join score on stu.sno = score.sno group by stu.sno;";
+        				Changemember4(sql);
+        			}
+        			else
+        			{
+        				Change2();
+        			}
+        			frame.setVisible(false);
+        		}
+        	}
+        });
+        but2.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent arg0){
+        		if(arg0.getSource()==but2)
+        		{
+        			frame.setVisible(false);
+        		}
+        	}
+        });  
+        but3.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent arg0){
+        		if(arg0.getSource()==but3)
+        		{
+        			frame.setVisible(false);
+        		}
+        	}
+        });
+
+        b1.setBounds(70, 10, 180,60);
+        but1.setBounds(5, 120, 80,30);
+        but2.setBounds(105, 120, 80,30); 
+        but3.setBounds(205, 120, 80,30); 
+        cont.add(b1);
+        cont.add(but1);
+        cont.add(but2);
+    	cont.add(but3);
+    	frame.setVisible(true);
+	}
+
+
 	public  Change()
 	{
-		JFrame frame =new JFrame("条件筛选界面");
+		JFrame frame =new JFrame("修改确认");
 		frame.setLayout(null);
-		JLabel Label= new JLabel("是否要进行学生信息查询");
+		JLabel Label= new JLabel("是否要进行学生信息修改");
 		JButton but1= new JButton("是");
 		JButton but2= new JButton("否");
-		frame.setSize(200, 200);
-		frame.setLocation(550, 250);
-		Label.setBounds(20, 5, 150,50);
-		 but1.setBounds(5, 90, 80,20);
-		 but2.setBounds(100, 90, 80,20);
-		 but1.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent arg0){
-					if(arg0.getSource()==but1){
-						Change1();
-						frame.setVisible(false);
-					}
+
+		Font f1=new Font("楷体",Font.BOLD,17);
+		Font f2=new Font("楷体",Font.BOLD,15);
+		
+
+	    but1.setBounds(40, 110,90,30);
+	    but1.setFont(f2);
+	    but2.setBounds(160, 110,90,30);
+	    but2.setFont(f2);
+		Label.setBounds(50, 5, 200,100);
+		Label.setFont(f1);
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
+		
+		but1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				if(arg0.getSource()==but1)
+				{
+					Change1();
+					frame.setVisible(false);
 				}
-			});
-		    but2.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent arg0){
-					if(arg0.getSource()==but2){
-						frame.setVisible(false);
-					}
+			}
+		});
+		but2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				if(arg0.getSource()==but2)
+				{
+					frame.setVisible(false);
 				}
-			}); 
-		 frame.add(Label);
-		 frame.add( but1);
-		 frame.add( but2);
-		 frame.setVisible(true);
+			}
+		}); 
+		
+		frame.add(Label);
+		frame.add(but1);
+		frame.add(but2);
+		frame.setVisible(true);
 		 
 		 
 	}

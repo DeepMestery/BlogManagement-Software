@@ -2,7 +2,9 @@ package bag;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -37,17 +39,25 @@ public class Sc
     
     public  Sc()
 	{
-		JFrame frame =new JFrame("条件筛选界面");
+		JFrame frame =new JFrame("打分确认");
 		frame.setLayout(null);
 		JLabel Label= new JLabel("是否要进行学生博客打分");
 		JButton but1= new JButton("是");
 		JButton but2= new JButton("否");
+		Label.setBounds(55, 12, 200,100);
+		
+		Font f1=new Font("楷体",Font.BOLD,17);
+		Font f2=new Font("楷体",Font.BOLD,15);
+
+	    but1.setBounds(40, 110,90,30);
+	    but1.setFont(f2);
+	    but2.setBounds(160, 110,90,30);
+	    but2.setFont(f2);
+		Label.setBounds(50, 5, 200,100);
+		Label.setFont(f1);
 		frame.setSize(320, 220);
 		frame.setLocation(530, 230);
-		Label.setBounds(67, 14, 170,70);
-		Label.setFont(new java.awt.Font("Dialog", 1, 14));
-		but1.setBounds(35, 120, 100,30);
-		but2.setBounds(165, 120, 100,30);
+		
 		
 		but1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
@@ -63,7 +73,7 @@ public class Sc
 			public void actionPerformed(ActionEvent arg0){
 				if(arg0.getSource()==but2)
 				{
-						frame.setVisible(false);
+					frame.setVisible(false);
 				}
 			}
 		});
@@ -78,13 +88,18 @@ public class Sc
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void LabelGrade()
     {
-		JFrame frame = new JFrame("条件筛选界面");
-    	frame.setLayout(null);
+		JFrame frame =new JFrame("年级筛选");
 		Container cont=frame.getContentPane();
 		JComboBox b1=null;
 		JButton but1=new JButton("确定");
+		but1.setFont(new Font("楷体",1,14));
 		JButton but2=new JButton("取消");
+		but2.setFont(new Font("楷体",1,14));
 		JButton but3=new JButton("返回");
+		but3.setFont(new Font("楷体",1,14));
+    	frame.setLayout(null);
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
 		
         Sgrade=v1[0];
         sno=v3[0];
@@ -122,8 +137,7 @@ public class Sc
         });
         
         but2.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent arg0)
-        	{
+        	public void actionPerformed(ActionEvent arg0){
         		if(arg0.getSource()==but2)
         		{
         			frame.setVisible(false);
@@ -139,13 +153,11 @@ public class Sc
         		}
         	}
         });
-
-		frame.setSize(320, 220);
-		frame.setLocation(530, 230);
-        b1.setBounds(75, 5, 150,50);
-        but1.setBounds(10, 120, 80,20);
-        but2.setBounds(120, 120, 80,20);
-        but3.setBounds(220, 120, 80,20);
+        
+        b1.setBounds(70, 10, 180,60);
+        but1.setBounds(5, 120, 80,30);
+        but2.setBounds(105, 120, 80,30); 
+        but3.setBounds(205, 120, 80,30); 
         cont.add(b1);
         cont.add(but1);
         cont.add(but2);
@@ -244,14 +256,19 @@ public class Sc
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	public void LabelClass()
     {
-    	JFrame frame=new JFrame();
-    	JComboBox b2=null;
-    	Container cont=frame.getContentPane();
-    	JButton but1=new JButton("确定");
-    	JButton but2=new JButton("取消");
-    	JButton but3=new JButton("返回");
-    	frame.setLayout(null);
-    	frame.setLocation(550, 250);
+		JFrame frame=new JFrame("班级筛选");
+		JComboBox b2=null;
+		Container cont=frame.getContentPane();
+		JButton but1=new JButton("确定");
+		but1.setFont(new Font("楷体",1,14));
+		JButton but2=new JButton("取消");
+		but2.setFont(new Font("楷体",1,14));
+		JButton but3=new JButton("返回");
+		but3.setFont(new Font("楷体",1,14));
+		frame.setLayout(null);
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
+	
     	v2=FunClass();
     	Sclass=v2[0];
     	b2=new JComboBox(v2);
@@ -287,7 +304,8 @@ public class Sc
     	
 	    but2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				if(arg0.getSource()==but2){
+				if(arg0.getSource()==but2)
+				{
 					frame.setVisible(false);
 				}
 			}
@@ -295,19 +313,18 @@ public class Sc
 	    
 	    but3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				if(arg0.getSource()==but3){
-					LabelGrade();
+				if(arg0.getSource()==but3)
+				{
 					frame.setVisible(false);
+					LabelGrade();
 				}
 			}
 		});
 
-		frame.setSize(320, 220);
-		frame.setLocation(530, 230);
-	    b2.setBounds(75, 5, 150,50);
-	    but1.setBounds(5, 90, 80,20);
-	    but2.setBounds(105, 90, 80,20); 
-	    but3.setBounds(205, 90, 80,20); 
+        b2.setBounds(70, 10, 180,60);
+        but1.setBounds(5, 120, 80,30);
+        but2.setBounds(105, 120, 80,30); 
+        but3.setBounds(205, 120, 80,30);
 	    cont.add(b2);
 	    cont.add(but1);
 	    cont.add(but2);
@@ -404,18 +421,22 @@ public class Sc
 		return Scla;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked", "null" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void LabelNumber()
 	{
-		JFrame frame =new JFrame("条件筛选界面");
+		JFrame frame =new JFrame("学号筛选");
 		Container cont=frame.getContentPane();
-		
 		JComboBox b3=null;
 		JButton but1=new JButton("确定");
+		but1.setFont(new Font("楷体",1,14));
 		JButton but2=new JButton("取消");
+		but2.setFont(new Font("楷体",1,14));
 		JButton but3=new JButton("返回");
+		but3.setFont(new Font("楷体",1,14));
 		frame.setLayout(null);
-	    
+		frame.setSize(320, 220);
+		frame.setLocation(530, 230);
+		
 		v3=FunNumber();
 	    sno=v3[0]; 
 	    b3=new JComboBox(v3);
@@ -440,11 +461,13 @@ public class Sc
 			    	{
 			    		String sql="select * from Stu where Sclass='"+Sclass+"'";
 				        FunMark(sql);
+						frame.setVisible(false);
 			    	}
 			    	else
 			    	{
 			    		String sql="select * from Stu where Sno='"+sno+"'";
 			    		FunMark(sql);
+						frame.setVisible(false);
 
 			    	}
 				    frame.setVisible(false);
@@ -471,12 +494,10 @@ public class Sc
 		    }
 	    }); 
 
-		frame.setSize(320, 220);
-		frame.setLocation(530, 230);
-	    b3.setBounds(75, 5, 150,50);
-	    but1.setBounds(5, 90, 80,20);
-	    but2.setBounds(105, 90, 80,20); 
-	    but3.setBounds(205, 90, 80,20); 
+        b3.setBounds(70, 10, 180,60);
+        but1.setBounds(5, 120, 80,30);
+        but2.setBounds(105, 120, 80,30); 
+        but3.setBounds(205, 120, 80,30); 
 	    cont.add(b3);
 	    cont.add(but1);
 	    cont.add(but2);
@@ -592,19 +613,28 @@ public class Sc
 	{
 		JFrame frame =new JFrame("打分界面");
 	    frame.setAlwaysOnTop(true);
-		JTextField text=new  JTextField(4);
+	    JLabel lname =new JLabel("博文名称");
+	    lname.setFont(new Font("楷体",1,14));
+	    JLabel lscore =new JLabel("博文分数");
+	    lscore.setFont(new Font("楷体",1,14));
+	    JTextField tname=new  JTextField(10);
+		JTextField tscore=new  JTextField(10);
 		Container cont=frame.getContentPane();
-		JButton but1=new JButton("提交（停留在该生）");
+		JButton but1=new JButton("提交并继续");
+		but1.setFont(new Font("楷体",1,13));
 		JButton but2=new JButton("提交并关闭");
+		but2.setFont(new Font("楷体",1,13));
 		JButton but3=new JButton("不提交");
+		but3.setFont(new Font("楷体",1,13));
 		frame.setLayout(null);
 	   
 		but1.addActionListener(new ActionListener(){
 		    public void actionPerformed(ActionEvent arg0){
 			    if(arg0.getSource()==but1)
 			    {
-			    	String str=text.getText();
-			    	FunSubmit(sno,str);
+			    	String bname=tname.getText();
+			    	String bscore=tscore.getText();
+			    	FunSubmit(sno,bname,bscore);
 			    	frame.setVisible(false);
 			    	LabelMark(sno);
 			    }
@@ -616,8 +646,9 @@ public class Sc
 			    if(arg0.getSource()==but2)
 			    {
 			    	 frame.setVisible(false);
-			    	 String str=text.getText();
-			    	 FunSubmit(sno,str);
+			    	 String bname=tname.getText();
+			    	 String score=tscore.getText();
+			    	 FunSubmit(sno,bname,score);
 			    }
 		    }
 	    });  
@@ -625,24 +656,32 @@ public class Sc
 	    but3.addActionListener(new ActionListener(){
 		    public void actionPerformed(ActionEvent arg0){
 			    if(arg0.getSource()==but3){
-				   LabelClass();
+				 frame.setVisible(false);  
 			    }
 		    }
 	     }); 
 
-		frame.setLocation(1000, 250);
-	    frame.setSize(360,200);
-	    text.setBounds(100, 5, 150,50);
-	    but1.setBounds(5, 90, 160,20);
-	    but2.setBounds(175, 90, 80,20); 
-	    but3.setBounds(260, 90, 80,20); 
-	    cont.add(text);
+		frame.setLocation(980, 250);
+	    frame.setSize(390,220);
+	    lname.setBounds(30, 5, 160,40);
+	    tname.setBounds(110, 5, 200,40);
+
+	    lscore.setBounds(30, 60, 160,40);
+	    tscore.setBounds(110, 60, 200,40);
+	    
+	    but1.setBounds(5, 120, 110,20);
+	    but2.setBounds(135, 120,110,20); 
+	    but3.setBounds(265, 120,110,20); 
+	    cont.add(tname);
+	    cont.add(lname);
+	    cont.add(tscore);
+	    cont.add(lscore);
 	    cont.add(but1);
 	    cont.add(but2);
 	    cont.add(but3);
 	    frame.setVisible(true);
-	    String str=text.getText();
-	    return str;
+	   
+	    return null;
 	}
 	
 	public String[] FunMark(String sql)
@@ -745,9 +784,10 @@ public class Sc
 			}
 			Object[][] playerInfo = a7;
 			String[] Names={"年级","班级","学号","姓名","博客地址"};
-			JFrame f=new JFrame();
+			JFrame f=new JFrame("查询结果");
+			f.setBounds(470, 100, 600, 400);
 			JTable table=new JTable(playerInfo,Names);
-			table.setPreferredScrollableViewportSize(new Dimension(550,30));
+		    table.setPreferredScrollableViewportSize(new Dimension(600,400));
 			JScrollPane scrollPane=new JScrollPane(table);
 			
 			table.addMouseListener(new MouseAdapter()
@@ -771,12 +811,29 @@ public class Sc
 								e1.printStackTrace();
 							}
 							String celsno=(String)(table.getValueAt(row,2));
-							FunMark(celsno);
+							LabelMark(celsno);
+					
 						}
 				    }
 						else return;
 				}
 			});
+			table.addMouseMotionListener(new MouseAdapter(){  
+			       public void mouseMoved(MouseEvent e) {
+			    	   if(e.getPoint().y!=0)
+						{
+							table.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+							table .setToolTipText((String) table.getModel().getValueAt(e.getPoint().y/table.getRowHeight(),4));
+						}
+			    	   else
+			    	   {
+			    		   table.setCursor(null);
+			    		   table .setToolTipText(null);
+			    	   }
+			           }  
+			       }  
+			   );
+
 			
 			f.getContentPane().add(scrollPane,BorderLayout.CENTER);
 			f.setTitle("查询结果");
@@ -802,31 +859,9 @@ public class Sc
 		return Sno;
 	}
 	
-	public void LabelSubmit()
+	public void FunSubmit(String sno,String bname,String score1)
 	{
-		JFrame J = new JFrame();
-		JButton but1=new JButton("确定");
-		J.setLayout(null);
-		JLabel L = new JLabel("提交成功");
-		but1.setBounds(40, 110,90,30);
-		L.setBounds(70, 5, 200, 100);
-		J.setSize(300,200);
-		J.setLocation(550, 250);
-		J.add(L);
-		J.add(but1);
-		J.setVisible(true);
-		but1.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
-				if(arg0.getSource()==but1)
-				{
-					J.setVisible(false);
-				}
-			}
-		});
-	}
-	
-	public void FunSubmit(String sno,String score)
-	{
+		int score=Integer.parseInt(score1);
 		Connection conn = null;
 		Statement stmt = null;
 		try
@@ -840,26 +875,42 @@ public class Sc
 	
 		try
 		{
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student","root","MYSQL");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/Student?user=root&password=MYSQL&characterEncoding=utf8&useSSL=true");
 			stmt = conn.createStatement();
-			String sql = "select * from Stu where Sno ='"+sno+"'";
-			ResultSet rs = stmt.executeQuery(sql);
-			while(rs.next())
+			String sql = "insert into score (sno,bname,bscore)  values( '"+sno+"','"+bname+"',"+score+")";
+			int row = stmt.executeUpdate(sql);
+			
+			JFrame J = new JFrame("评分结果");
+			JButton but1=new JButton("确定");
+			J.setLayout(null);
+			sql = "select sum(bscore) from score where sno = '"+sno+"'";
+    		ResultSet rs = stmt.executeQuery(sql);
+    		while(rs.next())
+    		{
+    			score = rs.getInt(1);
+    		}
+			JLabel L = new JLabel(sno+"的总分为："+score);
+		    but1.setBounds(90, 110,110,30);
+		    but1.setFont(new Font("楷体",Font.BOLD,16));
+			L.setBounds(55, 5, 200,100);
+			L.setFont(new Font("楷体",1,17));
+			J.setSize(320, 220);
+			J.setLocation(530, 230);
+			J.add(L);
+			J.add(but1);
+			J.setVisible(true);
+			but1.addActionListener(new ActionListener()
 			{
-				String str=rs.getString(3);
-				if(sno.equals(str))
+				public void actionPerformed(ActionEvent arg0)
 				{
-					String str1=rs.getString(6);
-					int oldscore = Integer.parseInt(str1);
-					int add = Integer.parseInt(score);
-					int newscore = oldscore + add;
-					String sss =  Integer.toString(newscore);
-					sql = "update Stu set Score = '"+sss+"' where Sno = '"+sno+"'";
-					int row = stmt.executeUpdate(sql);
-					LabelSubmit();
+					if(arg0.getSource()==but1)
+					{
+						J.setVisible(false);
+						
+					}
 				}
-			}
-			rs.close();
+			});
+		
 		}
 		catch(Exception e)
 		{

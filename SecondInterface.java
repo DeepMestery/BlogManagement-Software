@@ -1,6 +1,7 @@
 package bag;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +24,7 @@ public class SecondInterface extends JFrame
 		//设置位置
 		setLocation(230, 80);
 		//背景图片的路径。（相对路径或者绝对路径。本例图片放于"java项目名"的文件下）
-		String path = "SecondBG.jpg";
+		String path = "D:/Work/Java Workspace/BlogManagement/images/SecondBG.jpg";
 		// 背景图片
 		ImageIcon background = new ImageIcon(path);
 		// 把背景图片显示在一个标签里面
@@ -35,7 +36,8 @@ public class SecondInterface extends JFrame
 		imagePanel.setOpaque(false);
 		// 把背景图片添加到分层窗格的最底层作为背景
 		imagePanel.setLayout(null);
-		
+
+		Font f=new Font("楷体",Font.BOLD,15);
 		JButton e1 =new JButton("增加学生信息");
 		JButton e2 =new JButton("删除学生信息");
 		JButton e3 =new JButton("修改学生信息");
@@ -49,6 +51,11 @@ public class SecondInterface extends JFrame
 		e3.setBounds(50, 220, 160, 45);
 		e4.setBounds(50, 320, 160, 45);
 		e5.setBounds(50, 420, 160, 45);
+		e1.setFont(f);
+		e2.setFont(f);
+		e3.setFont(f);
+		e4.setFont(f);
+		e5.setFont(f);
 		e1.setBackground(Color.decode("#FFD39B"));
 		e2.setBackground(Color.decode("#FFD39B"));
 		e3.setBackground(Color.decode("#FFD39B"));
@@ -59,7 +66,7 @@ public class SecondInterface extends JFrame
 		e1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				if(arg0.getSource()==e1){
-					new	add();
+					new	Add();
 				}
 			}
 		});
@@ -80,7 +87,7 @@ public class SecondInterface extends JFrame
 		e4.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				if(arg0.getSource()==e4){
-					new Change();
+					new Check();
 				}
 			}
 		});
